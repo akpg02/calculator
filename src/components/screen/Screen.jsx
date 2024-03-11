@@ -1,12 +1,13 @@
 import React from "react";
+import { Textfit } from "react-textfit";
 
 import "./Screen.css";
 
-function Screen({ value }) {
+function Screen({ calc }) {
   return (
-    <div className="screen">
-      <span className="value">{value}</span>
-    </div>
+    <Textfit className="screen" max={70}>
+      {calc.num ? calc.num : calc.res}
+    </Textfit>
   );
 }
 

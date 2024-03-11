@@ -21,3 +21,10 @@ button:hover {
 .equals:hover {
   background-color: #e69500;
 }
+
+.opt {
+  background-color: #ffaf1a;
+}
+.opt:hover {
+  background-color: #e69500;
+}
