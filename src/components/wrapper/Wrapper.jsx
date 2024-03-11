@@ -12,20 +12,18 @@ const btnValues = [
   [0, ".", "="],
 ];
 
-  const math = (a, b, sign) => {
-    const result = {
-      "+": (a, b) => a + b,
-      "-": (a, b) => a - b,
-      x: (a, b) => a * b,
-      "/": (a, b) => a / b,
-    };
-    return result[sign](a, b);
+const math = (a, b, sign) => {
+  const result = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b,
+    x: (a, b) => a * b,
+    "/": (a, b) => a / b,
   };
-
+  return result[sign](a, b);
+};
 
 function Wrapper() {
   const [calc, setCalc] = useState({ sign: "", num: 0, res: 0 });
-
 
   const numClickHandler = (btn) => {
     const numString = btn.toString();
@@ -63,20 +61,19 @@ function Wrapper() {
   };
 
   const signClickHandler = (btn) => {
-    if (calc.res && calc.num) {
-      setCalc({
-        sign: btn,
-        res: math(calc.res, calc.num, calc.sign),
-        num: 0,
-      });
-    } else {
-      // allows for calculating larger mathematical operations (i.e. 2+3/5*8)
-      setCalc({
-        sign: btn,
-        res: !calc.res && calc.num ? calc.num : calc.res,
-        num: 0,
-      });
-    }
+    // allows for calculating larger mathematical operations (i.e. 2+3/5*8)
+    let res =
+      calc.res && calc.num
+        ? math(calc.res, calc.num, calc.sign)
+        : !calc.res && calc.num
+        ? calc.num
+        : calc.res;
+
+    setCalc({
+      sign: btn,
+      res: res,
+      num: 0,
+    });
   };
 
   const commaClickHandler = (btn) => {
